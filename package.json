@@ -23,12 +23,14 @@
     "@tanstack/react-query-devtools": "^5.53.1",
     "@tiptap/extension-placeholder": "^2.6.6",
     "@tiptap/pm": "^2.6.6",
+    "@tiptap/react": "^2.6.6",
     "@tiptap/starter-kit": "^2.6.6",
     "@uploadthing/react": "^6.7.2",
     "arctic": "^1.9.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "data-fns": "^1.1.0",
+    "date-fns": "^3.6.0",
     "ky": "^1.7.1",
     "lucia": "^3.2.0",
     "lucide-react": "^0.436.0",
@@ -50,6 +52,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/date-fns": "^2.6.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
