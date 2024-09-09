@@ -12,10 +12,25 @@ export default function Page() {
       <div className="shadow-2xl flex h-full max-h-[40rem] w-full max-w-[64rem] rounded-2xl overflow-hidden bg-card">
         <div className="w-full space-y-10 overflow-auto p-10">
           <div className="space-y-1">
-            <h1 className="text-3xl font-bold text-center">Login to TweetNest</h1>
+            <h1 className="text-3xl font-bold text-center">
+              Login to TweetNest
+            </h1>
             <div className="space-y-5">
-                <LoginForm />
-                <Link href="/signup" className="block text-center hover:underline">Don&apos;t have an account? Sign up</Link>
+              <LoginForm />
+              <div className="flex justify-between">
+                <Link
+                  href="/forgot-password"
+                  className="block text-center hover:underline"
+                >
+                  Forgot password?
+                </Link>
+                <Link
+                  href="/signup"
+                  className="block text-center hover:underline"
+                >
+                  Don&apos;t have an account? Sign up
+                </Link>
+              </div>
             </div>
           </div>
         </div>
