@@ -43,9 +43,9 @@ async function WhoToFollow() {
       <div className="text-xl font-bold ">Who to follow</div>
       {userToFollow?.map((user: any) => (
         <div key={user.id} className="flex items-center justify-between gap-3">
-          <Link href={`/users/${user.username}`}>
+          <Link href={`/users/${user.username}`} className="flex">
             <UserAvatar avatarUrl={user.avatarUrl} className="flex-none" />
-            <div>
+            <div className="px-2">
               <p className="line-clamp-1 break-all font-semibold hover:underline">
                 {user.displayName}
               </p>
