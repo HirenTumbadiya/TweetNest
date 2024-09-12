@@ -3,22 +3,46 @@ import { Prisma } from "@prisma/client";
 //  The `satisfies` keyword ensures that `postDataInclude` matches the `Prisma.PostInclude` type definition.
 //  It helps with type checking, ensuring that `postDataInclude` conforms to the expected structure for including related user data in a Prisma query.
 
-export const postDataInclude = {
-  user: {
-    select: {
-      id: true,
-      username: true,
-      displayName: true,
-      avatarUrl: true,
+export function getUserDataSelect(loggedInUserId: string) {
+  return {
+    id: true,
+    username: true,
+    displayName: true,
+    avatarUrl: true,
+    followers: {
+      where: {
+        followerId: loggedInUserId,
+      },
+      select: {
+        followerId: true,
+      },
     },
-  },
-} satisfies Prisma.PostInclude;
+    _count: {
+      select: {
+        followers: true,
+      },
+    },
+  } satisfies Prisma.UserSelect;
+}
+
+export function getPostDataInclude(loggedInUserId: string) {
+  return {
+    user: {
+      select: getUserDataSelect(loggedInUserId),
+    },
+  } satisfies Prisma.PostInclude;
+}
 
 export type PostData = Prisma.PostGetPayload<{
-  include: typeof postDataInclude;
+  include: ReturnType<typeof getPostDataInclude>;
 }>;
 
 export interface PostPage {
   posts: PostData[];
   nextCursor: string | null;
+}
+
+export interface FollowerInfo {
+  followers: number;
+  isFollowedByUser: boolean;
 }
