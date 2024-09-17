@@ -56,12 +56,17 @@ export default function EditProfileDialog({
   const [croppedAvatar, setCroppedAvatar] = useState<Blob | null>(null);
 
   async function onSubmit(values: UpdateUserProfileValues) {
+    const newAvatarFile = croppedAvatar
+      ? new File([croppedAvatar], `avatar_${user.id}.webp`)
+      : undefined;
     mutation.mutate(
       {
         values,
+        avatar: newAvatarFile,
       },
       {
         onSuccess: () => {
+          setCroppedAvatar(null);
           onOpenChange(false);
         },
       },

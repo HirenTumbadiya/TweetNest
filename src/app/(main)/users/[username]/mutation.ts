@@ -1,5 +1,8 @@
+
 import { useToast } from "@/hooks/use-toast";
+import { PostsPage } from "@/lib/types";
 import { useUploadThing } from "@/lib/uploadthing";
+import { UpdateUserProfileValues } from "@/lib/validation";
 import {
   InfiniteData,
   QueryFilters,
@@ -7,9 +10,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { UpdateUserProfileValues } from "@/lib/validation";
 import { updateUserProfile } from "./action";
-import { PostsPage } from "@/lib/types";
 
 export function useUpdateProfileMutation() {
   const { toast } = useToast();
@@ -33,9 +34,9 @@ export function useUpdateProfileMutation() {
         avatar && startAvatarUpload([avatar]),
       ]);
     },
+    onSuccess: async ([updatedUser, uploadResult]) => {
+      const newAvatarUrl = uploadResult?.[0].serverData.avatarUrl;
 
-    onSuccess: async ([updatedUser, uploadResult]: any) => {
-      const newAvatarUrl = uploadResult?.[0].serverData?.avatarUrl;
       const queryFilter: QueryFilters = {
         queryKey: ["post-feed"],
       };
@@ -52,6 +53,7 @@ export function useUpdateProfileMutation() {
             pages: oldData.pages.map((page) => ({
               nextCursor: page.nextCursor,
               posts: page.posts.map((post) => {
+                console.log(updatedUser)
                 if (post.user.id === updatedUser.id) {
                   return {
                     ...post,
@@ -69,15 +71,16 @@ export function useUpdateProfileMutation() {
       );
 
       router.refresh();
+
       toast({
-        description: "Profile Updated",
+        description: "Profile updated",
       });
     },
     onError(error) {
       console.error(error);
       toast({
         variant: "destructive",
-        description: "Failed to update profile. Please try again",
+        description: "Failed to update profile. Please try again.",
       });
     },
   });
