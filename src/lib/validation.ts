@@ -36,3 +36,7 @@ export const uploadUserProfileSchema = z.object({
 });
 
 export type UpdateUserProfileValues = z.infer<typeof uploadUserProfileSchema>;
+
+export const createCommentSchema = z.object({
+  content: requiredString,
+})
