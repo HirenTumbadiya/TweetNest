@@ -4,7 +4,6 @@ import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import React, { Suspense } from "react";
 import UserAvatar from "./UserAvatar";
-import { Button } from "./ui/button";
 import { unstable_cache } from "next/cache";
 import { formatNumber } from "@/lib/utils";
 import FollowButton from "./FollowButton";
@@ -48,17 +47,18 @@ async function WhoToFollow() {
       {userToFollow?.map((user: any) => (
         <div key={user.id} className="flex items-center justify-between gap-3">
           <UserTooltip user={user}>
-            {" "}
             <Link href={`/users/${user.username}`} className="flex">
               <UserAvatar avatarUrl={user.avatarUrl} className="flex-none" />
-              <div className="px-2">
-                <p className="line-clamp-1 break-all font-semibold hover:underline">
-                  {user.displayName}
-                </p>
-                <p className="line-clamp-1 break-all text-muted-foreground">
-                  @{user.username}
-                </p>
-              </div>
+              <>
+                <div className="px-2">
+                  <p className="line-clamp-1 break-all font-semibold hover:underline">
+                    {user.displayName}
+                  </p>
+                  <p className="line-clamp-1 break-all text-muted-foreground">
+                    @{user.username}
+                  </p>
+                </div>
+              </>
             </Link>
           </UserTooltip>
 

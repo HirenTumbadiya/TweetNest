@@ -97,6 +97,51 @@ interface MediaPreviewsProps {
   attachments: Media[];
 }
 
+// function MediaPreviews({ attachments }: MediaPreviewsProps) {
+//   const [currentIndex, setCurrentIndex] = useState(0);
+
+//   const handleNext = () => {
+//     setCurrentIndex((prevIndex) => (prevIndex + 1) % attachments.length);
+//   };
+
+//   const handlePrev = () => {
+//     setCurrentIndex(
+//       (prevIndex) => (prevIndex - 1 + attachments.length) % attachments.length,
+//     );
+//   };
+//   return (
+//     <div className="relative">
+//       <div>
+//         <MediaPreview
+//           key={attachments[currentIndex].id}
+//           media={attachments[currentIndex]}
+//         />
+//       </div>
+//       {attachments.length > 1 && (
+//         <div className="absolute inset-0 flex items-center justify-between">
+//           <button
+//             onClick={handlePrev}
+//             className="bg-gray-500 text-white p-2 rounded"
+//             type="button"
+//           >
+//             <ChevronLeft />
+//           </button>
+//           <button
+//             onClick={handleNext}
+//             className="bg-gray-500 text-white p-2 rounded"
+//             type="button"
+//           >
+//             <ChevronRight />
+//           </button>
+//         </div>
+//       )}
+//       <div className="mt-2 text-center">
+//         {currentIndex + 1} / {attachments.length}
+//       </div>
+//     </div>
+//   );
+// }
+
 function MediaPreviews({ attachments }: MediaPreviewsProps) {
   return (
     <div

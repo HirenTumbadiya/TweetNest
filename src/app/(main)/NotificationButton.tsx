@@ -17,7 +17,7 @@ export default function NotificationButton({
     queryKey: ["unread-notifications-count"],
     queryFn: () =>
       kyInstance
-        .get("api/notifications/unread-count")
+        .get("api/notification/unread-count")
         .json<NotificationCountInfo>(),
     initialData: initialState,
     refetchInterval: 60 * 1000,

@@ -2,6 +2,7 @@
 
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
+import streanServerClient from "@/lib/stream";
 import { getUserDataSelect } from "@/lib/types";
 import {
   UpdateUserProfileValues,
@@ -17,11 +18,22 @@ export async function updateUserProfile(values: UpdateUserProfileValues) {
 
   if (!user) throw new Error("Unauthenticated");
 
-  // Update the user's profile in the database
-  const updatedUser = await prisma.user.update({
-    where: { id: user.id },
-    data: validatedValues,
-    select: getUserDataSelect(user.id),
+  const updatedUser = await prisma.$transaction(async (tx) => {
+    // Update the user's profile in the database
+    const updatedUser = await tx.user.update({
+      where: { id: user.id },
+      data: validatedValues,
+      select: getUserDataSelect(user.id),
+    });
+
+    await streanServerClient.partialUpdateUser({
+      id: user.id,
+      set: {
+        name: validatedValues.displayName,
+      },
+    });
+
+    return updatedUser;
   });
 
   // Return the updated user object

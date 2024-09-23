@@ -36,13 +36,15 @@ export default function PostEditor() {
   const { onClick, ...rootProps } = getRootProps();
 
   const editor = useEditor({
+    immediatelyRender: false,
+    content: "",
     extensions: [
       StarterKit.configure({
         bold: false,
         italic: false,
       }),
       Placeholder.configure({
-        placeholder: "What's crazy about",
+        placeholder: "What's crack-a-lackin'?",
       }),
     ],
   });
