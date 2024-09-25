@@ -139,3 +139,24 @@ export interface NotificationCountInfo {
 export interface MessageCountInfo {
   unreadCount: number;
 }
+
+export function getPasswordResetTokenSelect() {
+  return {
+    id: true,
+    userId: true,
+    user: {
+      select: {
+        id: true,
+        username: true,
+        email: true,
+      },
+    },
+    token: true,
+    expiresAt: true,
+    createdAt: true,
+  } satisfies Prisma.PasswordResetTokenSelect;
+}
+
+export type PasswordResetTokenData = Prisma.PasswordResetTokenGetPayload<{
+  select: ReturnType<typeof getPasswordResetTokenSelect>;
+}>;

@@ -40,3 +40,9 @@ export type UpdateUserProfileValues = z.infer<typeof uploadUserProfileSchema>;
 export const createCommentSchema = z.object({
   content: requiredString,
 })
+
+export const forgotPasswordSchema = z.object({
+  email: requiredString.email("Invalid email address"),
+});
+
+export type ForgotPasswordValues = z.infer<typeof forgotPasswordSchema>;
