@@ -16,23 +16,24 @@ datasource db {
 }
 
 model User {
-  id                    String         @id
-  username              String         @unique
+  id                    String               @id
+  username              String               @unique
   displayName           String
-  email                 String?        @unique
+  email                 String?              @unique
   passwordHash          String?
-  googleId              String?        @unique
+  googleId              String?              @unique
   avatarUrl             String?
   bio                   String?
   sessions              Session[]
   posts                 Post[]
-  following             Follow[]       @relation("Following")
-  followers             Follow[]       @relation("Followers")
+  following             Follow[]             @relation("Following")
+  followers             Follow[]             @relation("Followers")
   likes                 Like[]
   bookmarks             Bookmark[]
   comments              Comment[]
-  receivedNotifications Notification[] @relation("Recipient")
-  issuedNotifications   Notification[] @relation("Issuer")
+  receivedNotifications Notification[]       @relation("Recipient")
+  issuedNotifications   Notification[]       @relation("Issuer")
+  passwordResetTokens   PasswordResetToken[]
 
   createdAt DateTime @default(now())
 
@@ -145,4 +146,17 @@ enum NotificationType {
   LIKE
   FOLLOW
   COMMENT
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid()) // Unique identifier for the token
+  userId    String // Foreign key to the User model
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String // The actual token value, hashed for security
+  expiresAt DateTime // Expiration time of the token
+  used      Boolean  @default(false) // Track if the token has already been used
+
+  createdAt DateTime @default(now()) // Timestamp when the token was created
+
+  @@map("password_reset_tokens")
 }

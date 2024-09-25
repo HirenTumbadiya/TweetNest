@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import LoginForm from "./LoginForm";
 import Link from "next/link";
+import GoogleSignInButton from "./google/GoogleSignInButton";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -16,6 +17,12 @@ export default function Page() {
               Login to TweetNest
             </h1>
             <div className="space-y-5">
+              <GoogleSignInButton />
+              <div className="flex items-center gap-3">
+                <div className="h-px flex-1 bg-muted" />
+                <span>OR</span>
+                <div className="h-px flex-1 bg-muted" />
+              </div>
               <LoginForm />
               <div className="flex justify-between">
                 <Link
