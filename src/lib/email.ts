@@ -15,7 +15,12 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmail = async ({ to, subject, text, html }: SendEmailProps) => {
+export const sendEmail = async ({
+  to,
+  subject,
+  text,
+  html,
+}: SendEmailProps) => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -24,9 +29,8 @@ export const sendEmail = async ({ to, subject, text, html }: SendEmailProps) => 
       text,
       html,
     };
-    
+
     await transporter.sendMail(mailOptions);
-    console.log("Password reset email sent to:", to);
   } catch (error) {
     console.error("Error sending email:", error);
   }

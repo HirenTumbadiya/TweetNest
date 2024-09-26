@@ -14,7 +14,6 @@ export default function SwitchButton() {
   }, [theme]);
 
   const toggleTheme = () => {
-    console.log("toggleTheme", theme)
     const newTheme = isDark ? "light" : "dark";
     setTheme(newTheme);
   };
