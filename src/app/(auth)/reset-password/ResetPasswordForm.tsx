@@ -15,7 +15,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const resetPasswordSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
@@ -25,8 +25,10 @@ export default function ResetPasswordForm() {
   const [error, setError] = useState<string>();
 
   const [isPending, startTransition] = useTransition();
-  const router = useRouter(); // For reading query params
-  const { token, id } = router.query; // Get token and user ID from URL query
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const token = searchParams.get("token");
+  const id = searchParams.get("id");
 
   const form = useForm<any>({
     resolver: zodResolver(resetPasswordSchema),
@@ -67,16 +69,16 @@ export default function ResetPasswordForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>New Password</FormLabel>
               <FormControl>
-                <PasswordInput placeholder="Password" {...field} />
+                <PasswordInput placeholder="New Password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <LoadingButton loading={isPending} type="submit" className="w-full">
-          Log in
+          Save
         </LoadingButton>
       </form>
     </Form>
