@@ -6,7 +6,7 @@ import ForgotPasswordForm from "./ForgotPasswordForm";
 const ForgotPasswordPage: React.FC = () => {
   return (
     <main className="flex h-screen items-center justify-center p-5">
-      <div className="shadow-2xl flex h-full max-h-[40rem] w-full max-w-[64rem] rounded-2xl overflow-hidden bg-card">
+      <div className="shadow-2xl flex h-full max-h-[40rem] w-full max-w-[30rem] rounded-2xl overflow-hidden bg-card">
         <div className="w-full space-y-10 overflow-auto p-10">
           <div className="space-y-1">
             <div className="flex justify-center items-center pb-2">
