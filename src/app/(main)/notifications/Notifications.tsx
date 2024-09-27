@@ -26,7 +26,7 @@ export default function Notifications() {
     queryFn: ({ pageParam }) =>
       kyInstance
         .get(
-          "/api/notifications",
+          "/api/notification",
           pageParam ? { searchParams: { cursor: pageParam } } : {},
         )
         .json<NotificationsPage>(),
@@ -36,7 +36,7 @@ export default function Notifications() {
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: () => kyInstance.patch("/api/notification/mark-as-read"),
+    mutationFn: () => kyInstance.patch("/api/mark-as-read"),
     onSuccess: () => {
       queryClient.setQueryData(["unread-notifications-count"], {
         unreadCount: 0,

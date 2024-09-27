@@ -46,10 +46,10 @@ export default function ChatSidebar({ open, onClose }: ChatSidebarProps) {
 
   return (
     <div
-      className={cn(
-        "size-full flex flex-col border-0 md:w-72",
-        open ? "flex" : "hidden",
-      )}
+    // className={cn(
+    //   "size-full flex flex-col border-0 md:w-72",
+    //   open ? "flex" : "hidden",
+    // )}
     >
       <MenuHeader onClose={onClose} />
       <ChannelList
